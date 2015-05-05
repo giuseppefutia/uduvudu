@@ -205,6 +205,47 @@
   </div>
 </script>
 
+<script id="timeline" type="text/uduvudu-template">
+    <div id="test">
+        <big>&#8982;</big><%-timeline.sd.u%> / <%-timeline.ed.u%><%-timeline.text.u%>
+    </div>
+    <div class="outerwrapper">
+        <div class="timeline">
+            <div class="timeline-header">
+                <h2>
+                    <span class="timeline-heading"></span>
+                </h2>
+                <p class="timeline-standfirst"></p>
+            </div>
+            <div class="tooltip">
+                <p></p>
+            </div>
+        </div>
+        <!-- timeline -->
+        <div class="info-box">
+            <div class="panel"></div>
+        </div>
+    </div>
+    <!-- outerwrapper -->
+</script>
+
+<script id="timelinejs" type="text/uduvudu-template">
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "lib/timeline.js";
+        script.src = "http://d3js.org/d3.v3.min.js";
+        document.body.appendChild(script);
+        var data = [
+                    {
+                      "dateStart": <%-timeline.sd.u%>,
+                      "dateEnd": <%-timeline.ed.u%>, 
+                      "headline": <%-timeline.title.u%>,
+                      "title": <%-timeline.text.u%>,
+                    }
+                  ];
+        createTimeline(data);
+</script>
+
 <!-- container for literals -->
 <script id="literals" type="text/uduvudu-template">
     <div style="clear: both;">

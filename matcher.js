@@ -19,6 +19,7 @@ var combineMatchers = [
     {matcherName: "humi", templateId: "humidity", combineIds: ['janHumidity','febHumidity','marHumidity','aprHumidity','mayHumidity','junHumidity','julHumidity','augHumidity','sepHumidity','octHumidity','novHumidity','decHumidity'], order: 8000000 },
     {matcherName: "highC", templateId: "temp", combineIds: ['janHighC','febHighC','marHighC','aprHighC','mayHighC','junHighC','julHighC','augHighC','sepHighC','octHighC','novHighC','decHighC'], order: 8000000 },
     {matcherName: "lowC", templateId: "temp", combineIds: ['janLowC','febLowC','marLowC','aprLowC','mayLowC','junLowC','julLowC','augLowC','sepLowC','octLowC','novLowC','decLowC'], order: 8000000 },
+    {matcherName: "timeline", templateId: "timeline", combineIds: ['rdfschema_label', "schema_description", "startDate", "endDate"], order: 8000000 },
 ];
 
 var linkMatchers = [
@@ -106,4 +107,6 @@ var predicateMatchers = [
     {matcherName: "octHumidity", predicate: "http://dbpedia.org/property/octHumidity", templateId: "text", templateVariable: "oct", order: 9000000 },
     {matcherName: "novHumidity", predicate: "http://dbpedia.org/property/novHumidity", templateId: "text", templateVariable: "nov", order: 9000000 },
     {matcherName: "decHumidity", predicate: "http://dbpedia.org/property/decHumidity", templateId: "text", templateVariable: "dec", order: 9000000 },
+    {matcherName: "startDate", predicate: "http://schema.org/startDate", templateId: "text", templateVariable: "sd", order: 90000 },
+    {matcherName: "endDate", predicate: "http://schema.org/endDate", templateId: "text", templateVariable: "ed", order: 1100000 }
 ];
