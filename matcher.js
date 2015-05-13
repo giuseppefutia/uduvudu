@@ -19,13 +19,16 @@ var combineMatchers = [
     {matcherName: "humi", templateId: "humidity", combineIds: ['janHumidity','febHumidity','marHumidity','aprHumidity','mayHumidity','junHumidity','julHumidity','augHumidity','sepHumidity','octHumidity','novHumidity','decHumidity'], order: 8000000 },
     {matcherName: "highC", templateId: "temp", combineIds: ['janHighC','febHighC','marHighC','aprHighC','mayHighC','junHighC','julHighC','augHighC','sepHighC','octHighC','novHighC','decHighC'], order: 8000000 },
     {matcherName: "lowC", templateId: "temp", combineIds: ['janLowC','febLowC','marLowC','aprLowC','mayLowC','junLowC','julLowC','augLowC','sepLowC','octLowC','novLowC','decLowC'], order: 8000000 },
-    {matcherName: "timeline", templateId: "timeline", combineIds: ['rdfschema_label', "schema_description", "startDate", "endDate"], order: 8000000 },
+    {matcherName: "eventLocation", templateId: "eventInfoBox", combineIds: ['location'], order: 8000000},
+    {matcherName: "eventInfoBox", templateId: "eventInfoBox", combineIds: ['rdfschema_label', 'schema_description', 'schema_category', 'startDate', 'endDate', 'linkEventLocation'], order: 7000000 }, 
+    {matcherName: "timeline", templateId: "timeline", combineIds: ['rdfschema_label', "schema_description", "startDate", "endDate"], order: 7000000 }
 ];
 
 var linkMatchers = [
     {matcherName: "neighboringMunicipality", predicate: "http://dbpedia.org/property/neighboringMunicipalities", templateId: "neighboringMunicipality", templateVariable: "neighboringMunicipality", order: 4000000, linkIds: ['rdfschema_label']},
     {matcherName: "addressPart", predicate: "http://www.w3.org/2000/10/swap/pim/contact#address", templateVariable: "addressLink", templateId: "address", order: 1000000, linkIds: ['addressPartCombine']},
     {matcherName: "creator", predicate: "http://purl.org/dc/terms/creator", templateVariable: "creator", templateId: "creator", order: 20000, linkIds: ['rdfschema_label'] },
+    {matcherName: "linkEventLocation", predicate: "http://schema.org/location", templateVariable: "eventInfoBox", templateId: "eventInfoBox", order: 20000, linkIds: ['eventLocation']}
 ];
 
 var predicateMatchers = [
@@ -108,6 +111,11 @@ var predicateMatchers = [
     {matcherName: "octHumidity", predicate: "http://dbpedia.org/property/octHumidity", templateId: "text", templateVariable: "oct", order: 9000000 },
     {matcherName: "novHumidity", predicate: "http://dbpedia.org/property/novHumidity", templateId: "text", templateVariable: "nov", order: 9000000 },
     {matcherName: "decHumidity", predicate: "http://dbpedia.org/property/decHumidity", templateId: "text", templateVariable: "dec", order: 9000000 },
-    {matcherName: "startDate", predicate: "http://schema.org/startDate", templateId: "text", templateVariable: "sd", order: 90000 },
-    {matcherName: "endDate", predicate: "http://schema.org/endDate", templateId: "text", templateVariable: "ed", order: 1100000 }
+    // Matchers to manage data on events
+    {matcherName: "startDate", predicate: "http://schema.org/startDate", templateId: "text", templateVariable: "startDate", order: 90000 },  
+    {matcherName: "endDate", predicate: "http://schema.org/endDate", templateId: "text", templateVariable: "endDate", order: 1100000 },
+    {matcherName: "schema_addressLocality", predicate: "http://schema.org/addressLocality", templateId: "text", templateVariable: "addressLocality", order: 1100000},
+    {matcherName: "schema_postalCode", predicate: "http://schema.org/postalCode", templateId: "text", templateVariable: "postalCode", order: 1100000},
+    {matcherName: "schema_streetAddress", predicate: "http://schema.org/streetAddress", templateId: "text", templateVariable: "streetAddress", order: 1100000},
+    {matcherName: "schema_category", predicate: "http://schema.org/category", templateId: "text", templateVariable: "category", order: 1100000}
 ];

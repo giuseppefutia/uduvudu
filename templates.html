@@ -218,7 +218,8 @@
 
 <script id="timeline" type="text/uduvudu-template">
     <div id="test">
-        <big>&#8982;</big><%-timeline.sd.u%> / <%-timeline.ed.u%><%-timeline.text.u%>
+        <h1>This is a sample of timeline</h1>
+        <big>&#8982;</big><%-timeline.startDate.u%> / <%-timeline.endDate.u%><%-timeline.text.u%>
     </div>
     <div class="outerwrapper">
         <div class="timeline">
@@ -248,13 +249,22 @@
         document.body.appendChild(script);
         var data = [
                     {
-                      "dateStart": <%-timeline.sd.u%>,
-                      "dateEnd": <%-timeline.ed.u%>, 
+                      "dateStart": <%-timeline.startDate.u%>,
+                      "dateEnd": <%-timeline.endDate.u%>, 
                       "headline": <%-timeline.title.u%>,
                       "title": <%-timeline.text.u%>,
                     }
                   ];
         createTimeline(data);
+</script>
+
+<script id="eventInfoBox" type="text/uduvudu-template">
+    <div id="infoBox">
+      <h1>This is a sample event infobox</h1>
+      <%-eventInfoBox.startDate.u%>
+      <%-eventInfoBox.category.u%>
+    </div>
+
 </script>
 
 <!-- container for literals -->
