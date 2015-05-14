@@ -183,17 +183,16 @@
     var script = document.createElement("script");
         script.type = "text/javascript";
         script.src = "http://www.openlayers.org/api/OpenLayers.js";
+        alert("ciao");
         script.onload = function(){
             map = new OpenLayers.Map("map-canvas");
             map.addLayer(new OpenLayers.Layer.OSM());
  
-            var lonLat = new OpenLayers.LonLat( <%-location.long.u%> ,<%-location.lat.u%> )
+            var lonLat = new OpenLayers.LonLat( <%-eventInfoBox.location[0].location.long.u%> ,<%-eventInfoBox.location[0].location.lat.u%> )
                 .transform(
                 new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
                 map.getProjectionObject() // to Spherical Mercator Projection
             );
-
-            alert(<%-location.long.u%>)
  
             var zoom=14;
  
@@ -262,24 +261,41 @@
         document.body.appendChild(script);
 </script>
 
+<script id="eventLocation" type="text/uduvudu-template">
+    <div id="map-canvas" style="height: 250px; width: 560px; float: left;">
+    </div> 
+</script>
+
+<script id="eventLocation_js" type="text/uduvudu-template">
+    var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.src = "http://www.openlayers.org/api/OpenLayers.js";
+        script.onload = function(){
+            map = new OpenLayers.Map("map-canvas");
+            map.addLayer(new OpenLayers.Layer.OSM());
+            var lonLat = new OpenLayers.LonLat( <%-locationLink[0].eventLocation.long.u%> ,<%-locationLink[0].eventLocation.lat.u%> )
+                .transform(
+                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                map.getProjectionObject() // to Spherical Mercator Projection
+            );
+ 
+            var zoom=14;
+ 
+            var markers = new OpenLayers.Layer.Markers( "Markers" );
+            map.addLayer(markers);
+
+            markers.addMarker(new OpenLayers.Marker(lonLat));
+ 
+            map.setCenter (lonLat, zoom);
+    };
+    document.body.appendChild(script);
+</script>
+
 <script id="eventInfoBox" type="text/uduvudu-template">
     <div id="infoBox">
       <h1>This is a sample event infobox</h1>
-      <%-eventInfoBox.linkEventLocation%>
-      <%-eventInfoBox.category.u%>
       <%-eventInfoBox.category.u%>
     </div>
-</script>
-
-<script id="eventInfoBox_js" type="text/uduvudu-template">
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.onload = function(){
-            
-            console.log("ciao");
-        };
-        document.body.appendChild(script);
-
 </script>
 
 <!-- container for literals -->
