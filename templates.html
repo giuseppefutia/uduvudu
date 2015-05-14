@@ -192,6 +192,8 @@
                 new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
                 map.getProjectionObject() // to Spherical Mercator Projection
             );
+
+            alert(<%-location.long.u%>)
  
             var zoom=14;
  
@@ -202,6 +204,7 @@
  
             map.setCenter (lonLat, zoom);
     };
+    document.body.appendChild(script);
 </script>
 
 <script id="created" type="text/uduvudu-template">
@@ -221,7 +224,7 @@
         <h1>This is a sample of timeline</h1>
         <big>&#8982;</big><%-timeline.startDate.u%> / <%-timeline.endDate.u%><%-timeline.text.u%>
     </div>
-    <div class="outerwrapper">
+    <div class="outerwrapper">t
         <div class="timeline">
             <div class="timeline-header">
                 <h2>
@@ -241,12 +244,11 @@
     <!-- outerwrapper -->
 </script>
 
-<script id="timelinejs" type="text/uduvudu-template">
+<script id="timeline_js" type="text/uduvudu-template">
         var script = document.createElement("script");
         script.type = "text/javascript";
         script.src = "lib/timeline.js";
         script.src = "http://d3js.org/d3.v3.min.js";
-        document.body.appendChild(script);
         var data = [
                     {
                       "dateStart": <%-timeline.startDate.u%>,
@@ -255,15 +257,28 @@
                       "title": <%-timeline.text.u%>,
                     }
                   ];
+                  
         createTimeline(data);
+        document.body.appendChild(script);
 </script>
 
 <script id="eventInfoBox" type="text/uduvudu-template">
     <div id="infoBox">
       <h1>This is a sample event infobox</h1>
-      <%-eventInfoBox.startDate.u%>
+      <%-eventInfoBox.linkEventLocation%>
+      <%-eventInfoBox.category.u%>
       <%-eventInfoBox.category.u%>
     </div>
+</script>
+
+<script id="eventInfoBox_js" type="text/uduvudu-template">
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.onload = function(){
+            
+            console.log("ciao");
+        };
+        document.body.appendChild(script);
 
 </script>
 
