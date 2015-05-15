@@ -218,49 +218,6 @@
   </div>
 </script>
 
-<script id="timeline" type="text/uduvudu-template">
-    <div id="test">
-        <h1>This is a sample of timeline</h1>
-        <big>&#8982;</big><%-timeline.startDate.u%> / <%-timeline.endDate.u%>
-    </div>
-    <div class="outerwrapper">t
-        <div class="timeline">
-            <div class="timeline-header">
-                <h2>
-                    <span class="timeline-heading"></span>
-                </h2>
-                <p class="timeline-standfirst"></p>
-            </div>
-            <div class="tooltip">
-                <p></p>
-            </div>
-        </div>
-        <!-- timeline -->
-        <div class="info-box">
-            <div class="panel"></div>
-        </div>
-    </div>
-    <!-- outerwrapper -->
-</script>
-
-<script id="timeline_js" type="text/uduvudu-template">
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.src = "lib/timeline.js";
-        script.src = "http://d3js.org/d3.v3.min.js";
-        var data = [
-                    {
-                      "dateStart": <%-timeline.startDate.u%>,
-                      "dateEnd": <%-timeline.endDate.u%>, 
-                      "headline": "headline",
-                      "title": "titolo"
-                    }
-                  ];
-                  
-        createTimeline(data);
-        document.body.appendChild(script);
-</script>
-
 <script id="eventLocation" type="text/uduvudu-template">
     <div id="map-canvas" style="height: 400px; width: 560px; float: right;">
     </div> 
@@ -296,7 +253,12 @@
       <h2><%-eventInfoBox.label.u%></h2>
       <h3><%=eventInfoBox.description.u%></h3> <!--occhio all "=" perché voglio che transcluda l'html-->
       <h4><%-eventInfoBox.category.u%></h4>
+      <h5><%-eventInfoBox.startDate.u%> - <%-eventInfoBox.endDate.u%></h5>
       <%=eventInfoBox.comment.u%>
+      <br><br>
+      <p><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <%-eventInfoBox.organizerLink[0].eventOrganizer.title.u%><br>
+      <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%-eventInfoBox.organizerLink[0].eventOrganizer.email.u%><br>
+      <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <%-eventInfoBox.organizerLink[0].eventOrganizer.telephone.u%></p>
     </div>
 </script>
 
@@ -314,9 +276,9 @@
     </div>
 </script>
 
-<!-- literal -->
+<!-- literal  -->
 <script id="literal" type="text/uduvudu-template">
-    <div style=" width: 140px; height: 140px; float: left; overflow: hidden;"><p title="<%-literal.subject.u%> - <%-literal.predicate.u%>"><b><%-literal.name.u%></b>:<br /> <%-literal.text.u%></p></div>
+    <!--<div style=" width: 140px; height: 140px; float: left; overflow: hidden;"><p title="<%-literal.subject.u%> - <%-literal.predicate.u%>"><b><%-literal.name.u%></b>:<br /> <%-literal.text.u%></p></div>-->
 </script>
 
 <!-- void -->
