@@ -250,8 +250,7 @@
 
 <script id="eventInfoBox" type="text/uduvudu-template">
     <div id="infobox" style="width: 560px; float: left;">
-      <h2><%-eventInfoBox.label.u%></h2>
-      <h3><%=eventInfoBox.description.u%></h3> <!--occhio all "=" perché voglio che transcluda l'html-->
+      <h3><%=eventInfoBox.description.u%></h3>
       <h4><%-eventInfoBox.category.u%></h4>
       <h5><%-eventInfoBox.startDate.u%> - <%-eventInfoBox.endDate.u%></h5>
       <%=eventInfoBox.comment.u%>
@@ -260,6 +259,22 @@
       <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <%-eventInfoBox.organizerLink[0].eventOrganizer.email.u%><br>
       <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <%-eventInfoBox.organizerLink[0].eventOrganizer.telephone.u%></p>
     </div>
+</script>
+
+<script id="POIInfoBox" type="text/uduvudu-template">
+      <h2>Punti di interesse</h2>
+     
+        <% 
+
+        for (var i = 0; i < POILink.length; i++) {
+          $("#poi2").append('<div class="singlePOI-' + i + '" style="width: 370px;">sss</div>');
+          //$(".singlePOI").append('<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>' + POILink[0].eventPOI.mbox.u)    
+
+        }
+
+        %>
+
+
 </script>
 
 <!-- container for literals -->

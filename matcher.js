@@ -22,7 +22,9 @@ var combineMatchers = [
     {matcherName: "eventLocation", templateId: "eventLocation", combineIds: ['lat', 'long'], order: 6000000},
     {matcherName: "eventAddress", templateId: "eventInfobox", combineIds: ['schema_streetAddress', 'schema_postalCode', 'schema_addressLocality'], order: 6000000},
     {matcherName: "eventOrganizer", templateId: "eventInfoBox", combineIds: ['schema_name', 'email', 'telephone'], order: 6000000},
-    {matcherName: "eventInfoBox", templateId: "eventInfoBox", combineIds: ['rdfschema_label', 'schema_description', 'schema_category', 'comment',"linkEventOrganizer","startDate","endDate"], order: 7000000 }
+    {matcherName: "eventInfoBox", templateId: "eventInfoBox", combineIds: ['rdfschema_label', 'schema_description', 'schema_category', 'comment',"linkEventOrganizer","startDate","endDate"], order: 7000000 },
+    {matcherName: "eventPOI", templateId: "POIInfoBox", combineIds: ['rdfschema_label', 'comment', 'foaf_mbox', 'foaf_phone', 'foaf_homepage'], order: 7000000},
+    {matcherName: "POIInfoBox", templateId: "POIInfoBox", combineIds: ['linkPOIEvent'], order: 7000000}
 ];
 
 var linkMatchers = [
@@ -31,7 +33,8 @@ var linkMatchers = [
     {matcherName: "creator", predicate: "http://purl.org/dc/terms/creator", templateVariable: "creator", templateId: "creator", order: 20000, linkIds: ['rdfschema_label'] },
     {matcherName: "linkEventLocation", predicate: "http://schema.org/location", templateVariable: "locationLink", templateId: "eventLocation", order: 200000, linkIds: ['eventLocation']},
     {matcherName: "linkEventOrganizer", predicate: "http://schema.org/organizer", templateVariable: "organizerLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventOrganizer']},
-    {matcherName: "linkEventAddress", predicate: "http://schema.org/address", templateVariable: "addressLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventAddress']}
+    {matcherName: "linkEventAddress", predicate: "http://schema.org/address", templateVariable: "addressLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventAddress']},
+    {matcherName: "linkPOIEvent", predicate: "http://sandbox.fusepool.info:8181/contains", templateVariable: "POILink", templateId: "POIInfoBox", order: 1100000, linkIds: ['eventPOI'] } // Usable only for Fusepool Platform
 ];
 
 var predicateMatchers = [
@@ -114,7 +117,7 @@ var predicateMatchers = [
     {matcherName: "octHumidity", predicate: "http://dbpedia.org/property/octHumidity", templateId: "text", templateVariable: "oct", order: 9000000 },
     {matcherName: "novHumidity", predicate: "http://dbpedia.org/property/novHumidity", templateId: "text", templateVariable: "nov", order: 9000000 },
     {matcherName: "decHumidity", predicate: "http://dbpedia.org/property/decHumidity", templateId: "text", templateVariable: "dec", order: 9000000 },
-    // Matchers to manage data on events
+    // Matchers to manage data on fusepool events
     {matcherName: "email", predicate: "http://schema.org/email", templateId: "text", templateVariable: "email", order: 90000 },
     {matcherName: "telephone", predicate: "http://schema.org/telephone", templateId: "text", templateVariable: "telephone", order: 90000 },
     {matcherName: "startDate", predicate: "http://schema.org/startDate", templateId: "text", templateVariable: "startDate", order: 90000 },  
@@ -122,5 +125,8 @@ var predicateMatchers = [
     {matcherName: "schema_addressLocality", predicate: "http://schema.org/addressLocality", templateId: "text", templateVariable: "addressLocality", order: 1100000},
     {matcherName: "schema_postalCode", predicate: "http://schema.org/postalCode", templateId: "text", templateVariable: "postalCode", order: 1100000},
     {matcherName: "schema_streetAddress", predicate: "http://schema.org/streetAddress", templateId: "text", templateVariable: "streetAddress", order: 1100000},
-    {matcherName: "schema_category", predicate: "http://schema.org/category", templateId: "text", templateVariable: "category", order: 1100000}
+    {matcherName: "schema_category", predicate: "http://schema.org/category", templateId: "text", templateVariable: "category", order: 1100000},
+    {matcherName: "foaf_mbox", predicate: "http://xmlns.com/foaf/0.1/mbox", templateId: "text", templateVariable: "mbox", order: 1100000},
+    {matcherName: "foaf_phone", predicate: "http://xmlns.com/foaf/0.1/phone", templateId: "text", templateVariable: "phone", order: 1100000},
+    {matcherName: "foaf_homepage", predicate: "http://xmlns.com/foaf/0.1/homepage", templateId: "text", templateVariable: "homepage", order: 1100000}
 ];
