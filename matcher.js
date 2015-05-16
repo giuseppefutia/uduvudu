@@ -23,7 +23,7 @@ var combineMatchers = [
     {matcherName: "eventAddress", templateId: "eventInfobox", combineIds: ['schema_streetAddress', 'schema_postalCode', 'schema_addressLocality'], order: 6000000},
     {matcherName: "eventOrganizer", templateId: "eventInfoBox", combineIds: ['schema_name', 'email', 'telephone'], order: 6000000},
     {matcherName: "eventInfoBox", templateId: "eventInfoBox", combineIds: ['rdfschema_label', 'schema_description', 'schema_category', 'comment',"linkEventOrganizer","startDate","endDate"], order: 7000000 },
-    {matcherName: "eventPOI", templateId: "POIInfoBox", combineIds: ['rdfschema_label', 'comment', 'foaf_mbox', 'foaf_phone', 'foaf_homepage'], order: 7000000},
+    {matcherName: "eventPOI", templateId: "POIInfoBox", combineIds: ['rdfschema_label', 'comment', 'foaf_mbox', 'foaf_phone', 'foaf_homepage', 'schema_category'], order: 7000000},
     {matcherName: "POIInfoBox", templateId: "POIInfoBox", combineIds: ['linkPOIEvent'], order: 7000000}
 ];
 
