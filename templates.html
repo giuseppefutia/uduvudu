@@ -286,17 +286,27 @@
 </script>
 
 <script id="carousel" type="text/uduvudu-template">
-      <div id="carousel" style="width: 1120px; height: 400px; float: left;">
-        <h2>Images</h2>
-        <br>
-        <%
-        for (var i = 0; i < skosLink.length; i++) {
-          //console.log(skosLink[i].eventSkos.m.r);
-        }
-
-        %>
-      </div>
-
+<% if(skosLink.length > 5) {
+      print('<div id="carousel" style="width: 1140px; float: left;"><h2>Images</h2><div class="col-md-12">');
+      print('<div class="well"><div id="myCarousel" class="carousel slide"><div class="carousel-inner" id="inCarousel">');  
+      print('<div class="item active"><div class="row">');
+      for (var i = 0; i < 4; i++) {
+          var fileurl;
+          var lastPart = skosLink[i].eventSkos.m.r.split("/").pop();
+          $.getJSON("https://it.wikipedia.org/w/api.php?action=query&prop=pageimages&titles="+lastPart+"&format=json&callback=?", function(data) {
+              for (var a in data.query.pages) {
+                  if (data.query.pages[a].pageimage != undefined) {
+                      var filename = data.query.pages[a].pageimage;
+                      $.getJSON("https://it.wikipedia.org/w/api.php?action=query&titles=File:"+filename+"&prop=imageinfo&iiprop=url&format=json&callback=?", function(data) {
+                          fileurl = data.query.pages[-1].imageinfo[0].url;
+$(".row").append('<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="'+fileurl+'" alt="Image" class="img-responsive"></a></div>');
+                      });
+                  }
+              }
+          });
+      }
+      print('</div></div></div><!--/carousel-inner--></div><!--/myCarousel--></div><!--/well--></div></div>');    
+} %>
 </script>
 
 <!-- container for literals -->
