@@ -24,7 +24,8 @@ var combineMatchers = [
     {matcherName: "eventOrganizer", templateId: "eventInfoBox", combineIds: ['schema_name', 'email', 'telephone'], order: 6000000},
     {matcherName: "eventInfoBox", templateId: "eventInfoBox", combineIds: ['rdfschema_label', 'schema_description', 'schema_category', 'comment',"linkEventOrganizer","startDate","endDate"], order: 7000000 },
     {matcherName: "eventPOI", templateId: "POIInfoBox", combineIds: ['rdfschema_label', 'comment', 'foaf_mbox', 'foaf_phone', 'foaf_homepage', 'schema_category'], order: 7000000},
-    {matcherName: "POIInfoBox", templateId: "POIInfoBox", combineIds: ['linkPOIEvent'], order: 7000000}
+    //{matcherName: "POIInfoBox", templateId: "POIInfoBox", combineIds: ['linkPOIEvent'], order: 7000000},
+    {matcherName: "eventSkos", templateId: "carousel", combineIds: ['skos_related'], order: 100000}
 ];
 
 var linkMatchers = [
@@ -34,7 +35,8 @@ var linkMatchers = [
     {matcherName: "linkEventLocation", predicate: "http://schema.org/location", templateVariable: "locationLink", templateId: "eventLocation", order: 200000, linkIds: ['eventLocation']},
     {matcherName: "linkEventOrganizer", predicate: "http://schema.org/organizer", templateVariable: "organizerLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventOrganizer']},
     {matcherName: "linkEventAddress", predicate: "http://schema.org/address", templateVariable: "addressLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventAddress']},
-    {matcherName: "linkPOIEvent", predicate: "http://sandbox.fusepool.info:8181/contains", templateVariable: "POILink", templateId: "POIInfoBox", order: 1100000, linkIds: ['eventPOI'] } // Usable only for Fusepool Platform
+    {matcherName: "linkPOIEvent", predicate: "http://sandbox.fusepool.info:8181/contains", templateVariable: "POILink", templateId: "POIInfoBox", order: 1100000, linkIds: ['eventPOI']}, // Usable only for Fusepool Platform
+    {matcherName: "linkSkosRelated", predicate: "http://www.w3.org/2004/02/skos/core#related", templateVariable: "skosLink", templateId: "carousel", order: 100000, linkIds: ['eventSkos']}
 ];
 
 var predicateMatchers = [
@@ -128,5 +130,6 @@ var predicateMatchers = [
     {matcherName: "schema_category", predicate: "http://schema.org/category", templateId: "text", templateVariable: "category", order: 1100000},
     {matcherName: "foaf_mbox", predicate: "http://xmlns.com/foaf/0.1/mbox", templateId: "text", templateVariable: "mbox", order: 1100000},
     {matcherName: "foaf_phone", predicate: "http://xmlns.com/foaf/0.1/phone", templateId: "text", templateVariable: "phone", order: 1100000},
-    {matcherName: "foaf_homepage", predicate: "http://xmlns.com/foaf/0.1/homepage", templateId: "text", templateVariable: "homepage", order: 1100000}
+    {matcherName: "foaf_homepage", predicate: "http://xmlns.com/foaf/0.1/homepage", templateId: "text", templateVariable: "homepage", order: 1100000},
+    {matcherName: "skos_related", predicate: "http://www.w3.org/2004/02/skos/core#related", templateId: "text", templateVariable: "text", order: 1100000}
 ];
