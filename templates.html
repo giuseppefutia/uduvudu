@@ -273,7 +273,7 @@
         'Agriturismo' : '<span class="glyphicon glyphicon-grain" aria-hidden="true"></span> ',
 
       };
-
+      $("#poi2").html("")
       for (var i = 0; i < POILink.length; i++) {
         $("#poi2").append('<div class="singlePOI-' + i + '" style="width: 380px; height: 200px; float: left;"></div>');
         $(".singlePOI-" + i ).append('<h4>' + POILink[i].eventPOI.label.u + '</h4>')
