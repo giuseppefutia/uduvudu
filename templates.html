@@ -270,7 +270,9 @@
         'Bed & Breakfast' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Hotel' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Appartamento Vacanze' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
-        'Agriturismo' : '<span class="glyphicon glyphicon-grain" aria-hidden="true"></span> ',
+        'Agriturismo' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
+        'Rifugio' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
+        'Residence' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> '
 
       };
       $("#poi2").html("")
@@ -287,7 +289,7 @@
 
 <script id="carousel" type="text/uduvudu-template">
 <% if(skosLink.length > 5) {
-      print('<div id="carousel" style="width: 1140px; float: left;"><h2>Event images (skos:related)</h2><div class="col-md-12">');
+      print('<div id="carousel" style="width: 1140px; float: left;"><h2>Event images</h2><div class="col-md-12">');
       print('<div class="well"><div id="myCarousel" class="carousel slide"><div class="carousel-inner" id="inCarousel">');  
       print('<div class="item active"><div class="row">');
       for (var i = 0; i < 4; i++) {
@@ -299,7 +301,7 @@
                       var filename = data.query.pages[a].pageimage;
                       $.getJSON("https://it.wikipedia.org/w/api.php?action=query&titles=File:"+filename+"&prop=imageinfo&iiprop=url&format=json&callback=?", function(data) {
                           fileurl = data.query.pages[-1].imageinfo[0].url;
-$(".row").append('<div class="col-sm-3"><a href="#x" class="thumbnail"><img src="'+fileurl+'" alt="Image" class="img-responsive"></a></div>');
+$(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" target="_blank"><img src="'+fileurl+'" alt="Image" class="img-responsive"></a></div>');
                       });
                   }
               }
