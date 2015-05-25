@@ -312,15 +312,170 @@ $(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" 
 </script>
 
 <script id="pagingBox" type="text/uduvudu-template">
-<%console.log(contractLink[0].contractInformation.label.u)
-console.log(contractLink[0].contractInformation.label.m.r)
+<div class="row-fluid">
+    <div class="span6">
+        <h4>Contratti partecipati (<% print(contractLink.length) %>)</h4>
+        <div class="nav nav-tabs nav-stacked">
+            <div class="list-group" id="pageStuff">
+
+<% for (var i = 0; i < contractLink.length; i++) {
+       print('<a href="'+contractLink[i].contractInformation.label.m.r+'" class="list-group-item" target="_blank">');
+       print('<p class="list-group-item-text">'+contractLink[i].contractInformation.label.u+'</p>');
+       print('</a>');
+   }
 %>
+
+            </div>
+        </div>
+    </div>
+    <div class="span6" id="nums_outer">
+        <nav>
+            <ul class="pagination" id="nums"></ul>
+        </nav> 
+    </div> 
+</div>
+</script>
+
+<script id="pagingBox_js" type="text/uduvudu-template">
+/* pagination */
+var listElement = $('#pageStuff');
+var perPage = 10; //number of paragraphs per page
+var numItems = listElement.children().size();
+var numPages = Math.ceil(numItems/perPage);
+
+$('#nums').data("curr",0);
+
+var curr = 0;
+while(numPages > curr){ //create bottom index
+    if (curr === 0) {
+        $('<li class="active"><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo('#nums');
+        curr++;
+    } else {
+        $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo('#nums');
+        curr++;
+    }
+}
+
+$('#nums .page_link:first').addClass('active');
+
+listElement.children().css('display', 'none');
+listElement.children().slice(0, perPage).css('display', 'block');
+
+$('#nums li a').click(function(e){
+    $('#nums .active').removeClass('active');
+    var $this = $(this).parent();
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+
+    var clickedPage = $(this).html().valueOf() - 1;
+    goTo(clickedPage,perPage);
+});
+
+function previous(){
+    var goToPage = parseInt($('#nums').data("curr")) - 1;
+    if($('.active').prev('.page_link').length==true){
+        goTo(goToPage);
+    }
+}
+
+function next(){
+    goToPage = parseInt($('#nums').data("curr")) + 1;
+    if($('.active_page').next('.page_link').length==true){
+        goTo(goToPage);
+    }
+}
+
+function goTo(page){
+    var startAt = page * perPage,
+        endOn = startAt + perPage;
+  
+    listElement.children().css('display','none').slice(startAt, endOn).css('display','block');
+    $('#nums').attr("curr",page);
+}
 </script>
 
 <script id="wonPagingBox" type="text/uduvudu-template">
-<%console.log(wonContractLink[0].wonContractInformation.label.u)
-console.log(wonContractLink[0].wonContractInformation.label.m.r)
+<div class="row-fluid">
+    <div class="span6">
+        <h4>Contratti aggiudicati (<% print(wonContractLink.length) %>)</h4>
+        <div class="nav nav-tabs nav-stacked">
+            <div class="list-group" id="wonPageStuff">
+
+<% for (var i = 0; i < wonContractLink.length; i++) {
+       print('<a href="'+wonContractLink[i].wonContractInformation.label.m.r+'" class="list-group-item" target="_blank">');
+       print('<p class="list-group-item-text">'+wonContractLink[i].wonContractInformation.label.u+'</p>');
+       print('</a>');
+   }
 %>
+
+            </div>
+        </div>
+    </div>
+    <div class="span6" id="nums_outer">
+        <nav>
+            <ul class="pagination" id="wonNums"></ul>
+        </nav> 
+    </div> 
+</div>
+</script>
+
+<script id="wonPagingBox_js" type="text/uduvudu-template">
+var wonListElement = $('#wonPageStuff');
+var wonPerPage = 10; //number of paragraphs per page
+var wonNumItems = wonListElement.children().size();
+var wonNumPages = Math.ceil(wonNumItems/wonPerPage);
+
+$('#wonNums').data("curr",0);
+
+var wonCurr = 0;
+while(wonNumPages > wonCurr){ //create bottom index
+    if (wonCurr === 0) {
+        $('<li class="active"><a href="#" class="page_link">'+(wonCurr+1)+'</a></li>').appendTo('#wonNums');
+        wonCurr++;
+    } else {
+        $('<li><a href="#" class="page_link">'+(wonCurr+1)+'</a></li>').appendTo('#wonNums');
+        wonCurr++;
+    }
+}
+
+$('#wonNums .page_link:first').addClass('active');
+
+wonListElement.children().css('display', 'none');
+wonListElement.children().slice(0, wonPerPage).css('display', 'block');
+
+$('#wonNums li a').click(function(e){
+    $('#wonNums .active').removeClass('active');
+    var $this = $(this).parent();
+    if (!$this.hasClass('active')) {
+        $this.addClass('active');
+    }
+
+    var clickedPage = $(this).html().valueOf() - 1;
+    goTo(clickedPage,perPage);
+});
+
+function wonPrevious(){
+    var wonGoToPage = parseInt($('#wonNums').data("curr")) - 1;
+    if($('.active').prev('.page_link').length==true){
+        wonGoTo(wonGoToPage);
+    }
+}
+
+function wonNext(){
+    wonGoToPage = parseInt($('#wonNums').data("curr")) + 1;
+    if($('.active_page').next('.page_link').length==true){
+        wonGoTo(wonGoToPage);
+    }
+}
+
+function wonGoTo(page){
+    var wonStartAt = page * wonPerPage,
+        wonEndOn = wonStartAt + wonPerPage;
+  
+    wonListElement.children().css('display','none').slice(wonStartAt, wonEndOn).css('display','block');
+    $('#wonNums').attr("curr",page);
+}
 </script>
 
 <!-- container for literals -->
