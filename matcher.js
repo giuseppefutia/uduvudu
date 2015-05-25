@@ -27,7 +27,8 @@ var combineMatchers = [
     {matcherName: "eventSkos", templateId: "carousel", combineIds: ['skos_related'], order: 100000},
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "contractInformation", templateId: "pagingBox", combineIds: ['rdfschema_label'], order: 100000},
-    {matcherName: "wonContractInformation", templateId: "wonPagingBox", combineIds: ['rdfschema_label'], order: 100000}
+    //{matcherName: "wonContractInformation", templateId: "wonPagingBox", combineIds: ['rdfschema_label'], order: 100000},
+    {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000}
 
 ];
 
@@ -42,7 +43,8 @@ var linkMatchers = [
     {matcherName: "linkSkosRelated", predicate: "http://www.w3.org/2004/02/skos/core#related", templateVariable: "skosLink", templateId: "carousel", order: 100000, linkIds: ['eventSkos']},
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "linkVatIDCig", predicate: "http://public-contracts.nexacenter.org/id/contract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
-    {matcherName: "linkVatIDWonCig", predicate: "http://public-contracts.nexacenter.org/id/wonContract", templateVariable: "wonContractLink", templateId: "wonPagingBox", order: 200000, linkIds: ['wonContractInformation']}
+    {matcherName: "linkVatIDWonCig", predicate: "http://public-contracts.nexacenter.org/id/wonContract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
+    {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
 ];
 
 var predicateMatchers = [
@@ -139,5 +141,5 @@ var predicateMatchers = [
     {matcherName: "foaf_homepage", predicate: "http://xmlns.com/foaf/0.1/homepage", templateId: "text", templateVariable: "homepage", order: 1100000},
     {matcherName: "skos_related", predicate: "http://www.w3.org/2004/02/skos/core#related", templateId: "text", templateVariable: "text", order: 1100000},
     //Matchers for http://public-contracts.nexacenter.org/
-    //{matcherName: "contracts", predicate: "http://public-contracts.nexacenter.org/id/contract", templateId: "pagingBox", templateVariable: "contracts", order: 1100000}
+    {matcherName: "awarded", predicate: "http://public-contracts.nexacenter.org/id/awarded", templateId: "text", templateVariable: "awarded", order: 1100000}
 ];
