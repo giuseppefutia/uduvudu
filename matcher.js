@@ -44,7 +44,8 @@ var linkMatchers = [
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "linkVatIDCig", predicate: "http://public-contracts.nexacenter.org/id/contract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
     {matcherName: "linkVatIDWonCig", predicate: "http://public-contracts.nexacenter.org/id/wonContract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
-    {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
+    {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
+    {matcherName: "linkVatIDPANum", predicate: "http://public-contracts.nexacenter.org/id/numberOfPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
 ];
 
 var predicateMatchers = [
