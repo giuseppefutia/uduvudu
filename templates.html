@@ -316,7 +316,7 @@ $(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" 
     <div class="span6">
         <h4>Contratti partecipati (<% print(contractLink.length) %>)</h4>
         <div class="nav nav-tabs nav-stacked">
-            <div class="list-group" id="pageStuff">
+            <div class="list-group" id="pageStuff<%-contractLink.m.name%>">
 
 <% for (var i = 0; i < contractLink.length; i++) {
        print('<a href="'+contractLink[i].contractInformation.label.m.r+'" class="list-group-item" target="_blank">');
@@ -330,75 +330,180 @@ $(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" 
     </div>
     <div class="span6" id="nums_outer">
         <nav>
-            <ul class="pagination" id="nums"></ul>
+            <% print('<ul class="pagination" id="'+contractLink.m.name+'"></ul>'); 
+console.log(contractLink);%>
         </nav> 
     </div> 
 </div>
 </script>
 
 <script id="pagingBox_js" type="text/uduvudu-template">
-/* pagination */
-var listElement = $('#pageStuff');
+var listElement<%-contractLink.m.name%> = $('#pageStuff<%-contractLink.m.name%>');
 var perPage = 10; //number of paragraphs per page
-var numItems = listElement.children().size();
-var numPages = Math.ceil(numItems/perPage);
+var numItems<%-contractLink.m.name%> = listElement<%-contractLink.m.name%>.children().size();
+var numPages<%-contractLink.m.name%> = Math.ceil(numItems<%-contractLink.m.name%>/perPage);
 
-$('#nums').data("curr",0);
+$('#<%-contractLink.m.name%>').data("curr",0);
 
-var curr = 0;
-while(numPages > curr){ //create bottom index
-    if (curr === 0) {
-        $('<li class="active"><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo('#nums');
-        curr++;
+var curr<%-contractLink.m.name%> = 0;
+while(numPages<%-contractLink.m.name%> > curr<%-contractLink.m.name%>){ //create bottom index
+    if (curr<%-contractLink.m.name%> === 0) {
+        $('<li class="active"><a href="#listContracts" class="page_link">'+(curr<%-contractLink.m.name%>+1)+'</a></li>').appendTo('#<%-contractLink.m.name%>');
+        curr<%-contractLink.m.name%>++;
     } else {
-        $('<li><a href="#" class="page_link">'+(curr+1)+'</a></li>').appendTo('#nums');
-        curr++;
+        $('<li><a href="#listContracts" class="page_link">'+(curr<%-contractLink.m.name%>+1)+'</a></li>').appendTo('#<%-contractLink.m.name%>');
+        curr<%-contractLink.m.name%>++;
     }
 }
 
-$('#nums .page_link:first').addClass('active');
+$('#<%-contractLink.m.name%> .page_link:first').addClass('active');
 
-listElement.children().css('display', 'none');
-listElement.children().slice(0, perPage).css('display', 'block');
+listElement<%-contractLink.m.name%>.children().css('display', 'none');
+listElement<%-contractLink.m.name%>.children().slice(0, perPage).css('display', 'block');
 
-$('#nums li a').click(function(e){
-    $('#nums .active').removeClass('active');
+$('#<%-contractLink.m.name%> li a').click(function(e){
+    $('#<%-contractLink.m.name%> .active').removeClass('active');
     var $this = $(this).parent();
     if (!$this.hasClass('active')) {
         $this.addClass('active');
     }
 
-    var clickedPage = $(this).html().valueOf() - 1;
-    goTo(clickedPage,perPage);
+    var clickedPage<%-contractLink.m.name%> = $(this).html().valueOf() - 1;
+    goTo<%-contractLink.m.name%>(clickedPage<%-contractLink.m.name%>,perPage);
 });
 
-function previous(){
-    var goToPage = parseInt($('#nums').data("curr")) - 1;
+function previous<%-contractLink.m.name%>(){
+    var goToPage<%-contractLink.m.name%> = parseInt($('#<%-contractLink.m.name%>').data("curr")) - 1;
     if($('.active').prev('.page_link').length==true){
-        goTo(goToPage);
+        goTo<%-contractLink.m.name%>(goToPage<%-contractLink.m.name%>);
     }
 }
 
-function next(){
-    goToPage = parseInt($('#nums').data("curr")) + 1;
+function next<%-contractLink.m.name%>(){
+    goToPage<%-contractLink.m.name%> = parseInt($('#<%-contractLink.m.name%>').data("curr")) + 1;
     if($('.active_page').next('.page_link').length==true){
-        goTo(goToPage);
+        goTo<%-contractLink.m.name%>(goToPage<%-contractLink.m.name%>);
     }
 }
 
-function goTo(page){
-    var startAt = page * perPage,
-        endOn = startAt + perPage;
+function goTo<%-contractLink.m.name%>(page){
+    var startAt<%-contractLink.m.name%> = page * perPage,
+        endOn<%-contractLink.m.name%> = startAt<%-contractLink.m.name%> + perPage;
   
-    listElement.children().css('display','none').slice(startAt, endOn).css('display','block');
-    $('#nums').attr("curr",page);
+    listElement<%-contractLink.m.name%>.children().css('display','none').slice(startAt<%-contractLink.m.name%>, endOn<%-contractLink.m.name%>).css('display','block');
+    $('#<%-contractLink.m.name%>').attr("curr",page);
 }
 </script>
 
 <script id="bars" type="text/uduvudu-template">
+<div id="bar-canvas"></div>
    <%console.log(awardedPaymentFromLink[0].awardedPaymentBars.awarded.u)
    console.log(awardedPaymentFromLink[0].awardedPaymentBars.label.u)
    console.log(awardedPaymentFromLink[0].awardedPaymentBars.label.m.r) %>
+</script>
+
+<script id="bars_js" type="text/uduvudu-template">
+<% var categories = [];
+categories[0] = ""; //trick for vertical align
+var dollars = [];
+
+for (var i = 1; i < awardedPaymentFromLink.length; i++) {
+    categories[i] = awardedPaymentFromLink[i].awardedPaymentBars.label.u;
+    dollars[i-1] = awardedPaymentFromLink[i].awardedPaymentBars.awarded.u;
+}
+
+var colors = ['#0283AF'];
+
+var grid = d3.range(25).map(function(i){
+    return {'x1':0,'y1':0,'x2':0,'y2':480};
+});
+
+var tickVals = grid.map(function(d,i){
+    if(i>0){ return i*10; }
+    else if(i===0){ return "100";}
+});
+
+var xscale = d3.scale.linear()
+    .domain([10,250])
+    .range([0,722]);
+
+var yscale = d3.scale.linear()
+    .domain([0,categories.length])
+    .range([0,480]);
+
+var colorScale = d3.scale.quantize()
+    .domain([0,categories.length])
+    .range(colors);
+
+var canvas = d3.select('#main')
+    .append('svg')
+    .attr({'width':900,'height':550});
+
+var grids = canvas.append('g')
+    .attr('id','grid')
+    .attr('transform','translate(150,10)')
+    .selectAll('line')
+    .data(grid)
+    .enter()
+    .append('line')
+    .attr({'x1':function(d,i){ return i*30; },
+         'y1':function(d){ return d.y1; },
+         'x2':function(d,i){ return i*30; },
+         'y2':function(d){ return d.y2-10; },
+    })
+    .style({'stroke':'#adadad','shape-rendering':'crispEdges'}); //long vertical ticks (stroke-width:1px)
+
+var xAxis = d3.svg.axis();
+   xAxis
+    .orient('bottom')
+    .scale(xscale)
+    .tickValues(tickVals);
+
+var yAxis = d3.svg.axis();
+   yAxis
+    .orient('left')
+    .scale(yscale)
+    .tickSize(2)
+    .tickFormat(function(d,i){ return categories[i]; })
+    .tickValues(d3.range(17));
+
+var y_xis = canvas.append('g')
+        .attr("transform", "translate(150,0)")
+        .attr('id','yaxis')
+        .call(yAxis);
+
+var x_xis = canvas.append('g')
+        .attr("transform", "translate(150,480)")
+        .attr('id','xaxis')
+        .call(xAxis);
+
+var chart = canvas.append('g')
+       .attr("transform", "translate(150,0)")
+       .attr('id','bars')
+       .selectAll('rect')
+       .data(dollars)
+       .enter()
+       .append('rect')
+       .attr('height',19)
+       .attr({'x':0,'y':function(d,i){ return yscale(i)+19; }})
+       .style('fill',function(d,i){ return colorScale(0); }) //XXX color trick colorScale(i)
+       .attr('width',function(d){ return 0; });
+
+
+var transit = d3.select("svg").selectAll("rect")
+          .data(dollars)
+          .transition()
+          .duration(1000) 
+          .attr("width", function(d) {return xscale(d); });
+
+var transitext = d3.select('#bars')
+       .selectAll('text')
+       .data(dollars)
+       .enter()
+       .append('text')
+       .attr({'x':function(d) {return xscale(d)-200; },'y':function(d,i){ return yscale(i)+35; }})
+       .text(function(d){ return d+"$"; }).style({'fill':'#fff','font-size':'14px'});
+%>
 </script>
 
 <!-- container for literals -->
