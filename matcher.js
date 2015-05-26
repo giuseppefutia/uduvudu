@@ -27,8 +27,8 @@ var combineMatchers = [
     {matcherName: "eventSkos", templateId: "carousel", combineIds: ['skos_related'], order: 100000},
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "contractInformation", templateId: "pagingBox", combineIds: ['rdfschema_label'], order: 100000},
-    //{matcherName: "wonContractInformation", templateId: "wonPagingBox", combineIds: ['rdfschema_label'], order: 100000},
-    {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000}
+    {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000},
+    {matcherName: "registryCombine", templateId: "registry", combineIds: ['rdfschema_label', 'gr_vatID'], order: 100000},
 
 ];
 
@@ -148,6 +148,6 @@ var predicateMatchers = [
     {matcherName: "awardedTotal", predicate: "http://public-contracts.nexacenter.org/id/awardedTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
     {matcherName: "paidTotal", predicate: "http://public-contracts.nexacenter.org/id/paidTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
     {matcherName: "awardsTotal", predicate: "http://public-contracts.nexacenter.org/id/awardsTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
-    {matcherName: "paysTotal", predicate: "http://public-contracts.nexacenter.org/id/paysTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000}
-
+    {matcherName: "paysTotal", predicate: "http://public-contracts.nexacenter.org/id/paysTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
+    {matcherName: "gr_vatID", predicate: "http://purl.org/goodrelations/v1#vatID", templateId: "text", templateVariable: "vatID", order: 1100000}
 ];
