@@ -142,5 +142,8 @@ var predicateMatchers = [
     {matcherName: "foaf_homepage", predicate: "http://xmlns.com/foaf/0.1/homepage", templateId: "text", templateVariable: "homepage", order: 1100000},
     {matcherName: "skos_related", predicate: "http://www.w3.org/2004/02/skos/core#related", templateId: "text", templateVariable: "text", order: 1100000},
     //Matchers for http://public-contracts.nexacenter.org/
-    {matcherName: "awarded", predicate: "http://public-contracts.nexacenter.org/id/awarded", templateId: "text", templateVariable: "awarded", order: 1100000}
+    {matcherName: "awarded", predicate: "http://public-contracts.nexacenter.org/id/awarded", templateId: "text", templateVariable: "awarded", order: 1100000},
+    {matcherName: "awardedTotal", predicate: "http://public-contracts.nexacenter.org/id/awardedTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
+    {matcherName: "paidTotal", predicate: "http://public-contracts.nexacenter.org/id/paidTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000}
+
 ];
