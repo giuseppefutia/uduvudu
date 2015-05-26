@@ -610,6 +610,25 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
 </header>
 </script>
 
+<script id="bubbles" type="text/uduvudu-template">
+<div></div>
+</script>
+
+<script id="bubbles_js" type="text/uduvudu-template">
+    <%
+    var bubbleArray = [];
+    for (var i=0; i<procedureTypeLink.length; i++) {
+        bubbleArray[i] = new Object;
+        bubbleArray[i].grant_title = procedureTypeLink[i].procedureTypeBubble.label.u;
+        bubbleArray[i].total_amount = procedureTypeLink[i].procedureTypeBubble.amount.u;
+        bubbleArray[i].start_year = "2010";//procedureTypeLink[i].procedureTypeBubble.procedure_type.u;
+        bubbleArray[i].id = (i+1).toString();
+    }
+    custom_bubble_chart.init(bubbleArray);
+    custom_bubble_chart.toggle_view('all');
+    %>
+</script>
+
 <!-- container for literals -->
 <script id="literals" type="text/uduvudu-template">
     <div style="clear: both;">
