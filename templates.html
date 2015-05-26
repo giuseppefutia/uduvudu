@@ -412,6 +412,8 @@ if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
     $('#titleLinkVatIDPANum').html('<h4>Numero gare vinte</h4>');
 } else if (awardedPaymentFromLink.m.name === "linkVatIDBE") {
     $('#titleLinkVatIDBE').html('<h4>Totale importi assegnati alle aziende [€]</h4>');
+} else if (awardedPaymentFromLink.m.name === "linkVatIDBENum") {
+    $('#titleLinkVatIDBENum').html('<h4>Numero gare assegnate</h4>');
 }
 
 var categories = [];
@@ -436,9 +438,7 @@ for (var i = 0; i < counter; i++) {
     }
 }
 
-if (maxVal == minVal) {
-    minVal = Math.floor(maxVal/10);
-}
+minVal = Math.floor(minVal/10);
 if (minVal < 5) {
     minVal = 0;
 }
@@ -486,10 +486,10 @@ var grid = d3.range(17).map(function(i){ //17 vertical bars number
     return {'x1':0,'y1':0,'x2':0,'y2':yHigh};
 });
 
-var tickVals = grid.map(function(d,i){ //xAxis values
+/*var tickVals = grid.map(function(d,i){ //xAxis values
     if(i>0){ return i*Math.floor(maxVal/counter); } //floor to decina
     else if(i===0){ return "0";}
-});
+});*/
 
 
 var xscale = d3.scale.linear()
@@ -504,7 +504,7 @@ var canvas = d3.select('#'+awardedPaymentFromLink.m.name) //here it appends the 
     .append('svg')
     .attr({'width':1140,'height':yHigh+50});
 
-var grids = canvas.append('g')
+/*var grids = canvas.append('g')
     .attr('id','grid')
     .attr('transform','translate(300,10)')
     .selectAll('line')
@@ -516,13 +516,13 @@ var grids = canvas.append('g')
          'x2':function(d,i){ return i*50; },
          'y2':function(d){ return d.y2-10; },
     })
-    .style({'stroke':'#adadad','shape-rendering':'crispEdges'}); //long vertical ticks (stroke-width:1px)
+    .style({'stroke':'#adadad','shape-rendering':'crispEdges'}); //long vertical ticks (stroke-width:1px)*/
 
 var xAxis = d3.svg.axis();
     xAxis
     .orient('bottom')
-    .scale(xscale)
-    .tickValues(tickVals);
+    .scale(xscale);
+    //.tickValues(tickVals);
 
 var yAxis = d3.svg.axis();
     yAxis
@@ -537,10 +537,10 @@ var y_xis = canvas.append('g')
         .attr('id','yaxis')
         .call(yAxis);
 
-var x_xis = canvas.append('g')
+/*var x_xis = canvas.append('g')
         .attr("transform", "translate(300,"+yHigh+")")
         .attr('id','xaxis')
-        .call(xAxis);
+        .call(xAxis);*/
 
 setTimeout(function(){
 var chart = canvas.append('g') //drow chart
@@ -611,7 +611,11 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
 </script>
 
 <script id="bubbles" type="text/uduvudu-template">
-<div></div>
+<%
+    $("#titleProcedureType").append("<h4>Contratti per tipo di procedura</h4>"); 
+    $("#titleProcedureType").append('<button type="button" id="all" class="btn btn-default active" onclick="reloadBubble(\'all\')">All</button>');
+    $("#titleProcedureType").append('<button type="button" id="year" class="btn btn-default" onclick="reloadBubble(\'year\')">By Year</button>');
+%>
 </script>
 
 <script id="bubbles_js" type="text/uduvudu-template">
