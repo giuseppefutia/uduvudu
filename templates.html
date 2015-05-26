@@ -406,10 +406,14 @@ function goTo<%-contractLink.m.name%>(page){
 
 <script id="bars_js" type="text/uduvudu-template">
 <% 
+console.log(awardedPaymentFromLink.m.name);
+
 if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
-    $('#titleLinkVatIDPA').html('<h4>Totale importi assegnati dalle PA [€]</h4>');
+    $('#titleLinkVatIDPA').html('<h4>Totale importi ricevuti da PA [€]</h4>');
 } else if (awardedPaymentFromLink.m.name === "linkVatIDPANum") {
     $('#titleLinkVatIDPANum').html('<h4>Numero gare vinte</h4>');
+} else if (awardedPaymentFromLink.m.name === "linkVatIDBE") {
+    $('#titleLinkVatIDBE').html('<h4>Totale importi assegnati alle aziende [€]</h4>');
 }
 
 var categories = [];
