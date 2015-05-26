@@ -45,7 +45,9 @@ var linkMatchers = [
     {matcherName: "linkVatIDCig", predicate: "http://public-contracts.nexacenter.org/id/contract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
     {matcherName: "linkVatIDWonCig", predicate: "http://public-contracts.nexacenter.org/id/wonContract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
     {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
-    {matcherName: "linkVatIDPANum", predicate: "http://public-contracts.nexacenter.org/id/numberOfPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
+    {matcherName: "linkVatIDPANum", predicate: "http://public-contracts.nexacenter.org/id/numberOfPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
+    {matcherName: "linkVatIDBE", predicate: "http://public-contracts.nexacenter.org/id/awardsBusinessEntity", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
+    {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/numberOfBEs", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
 ];
 
 var predicateMatchers = [
@@ -144,6 +146,8 @@ var predicateMatchers = [
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "awarded", predicate: "http://public-contracts.nexacenter.org/id/awarded", templateId: "text", templateVariable: "awarded", order: 1100000},
     {matcherName: "awardedTotal", predicate: "http://public-contracts.nexacenter.org/id/awardedTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
-    {matcherName: "paidTotal", predicate: "http://public-contracts.nexacenter.org/id/paidTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000}
+    {matcherName: "paidTotal", predicate: "http://public-contracts.nexacenter.org/id/paidTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
+    {matcherName: "awardsTotal", predicate: "http://public-contracts.nexacenter.org/id/awardsTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
+    {matcherName: "paysTotal", predicate: "http://public-contracts.nexacenter.org/id/paysTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000}
 
 ];
