@@ -348,6 +348,8 @@ var numPages<%-contractLink.m.name%> = Math.ceil(numItems<%-contractLink.m.name%
 
 $('#<%-contractLink.m.name%>').data("curr",0);
 
+if (numItems<%-contractLink.m.name%> > perPage) {
+
 var curr<%-contractLink.m.name%> = 0;
 while(numPages<%-contractLink.m.name%> > curr<%-contractLink.m.name%>){ //create bottom index
     if (curr<%-contractLink.m.name%> === 0) {
@@ -396,6 +398,8 @@ function goTo<%-contractLink.m.name%>(page){
     listElement<%-contractLink.m.name%>.children().css('display','none').slice(startAt<%-contractLink.m.name%>, endOn<%-contractLink.m.name%>).css('display','block');
     $('#<%-contractLink.m.name%>').attr("curr",page);
 }
+
+}
 </script>
 
 <script id="bars" type="text/uduvudu-template"><div></div></script>
@@ -403,7 +407,7 @@ function goTo<%-contractLink.m.name%>(page){
 <script id="bars_js" type="text/uduvudu-template">
 <% 
 if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
-    $('#titleLinkVatIDPA').html('<h4>Totale importi assegnati dalle PA</h4>');
+    $('#titleLinkVatIDPA').html('<h4>Totale importi assegnati dalle PA [€]</h4>');
 } else if (awardedPaymentFromLink.m.name === "linkVatIDPANum") {
     $('#titleLinkVatIDPANum').html('<h4>Numero gare vinte</h4>');
 }
@@ -484,7 +488,6 @@ var tickVals = grid.map(function(d,i){ //xAxis values
     if(i>0){ return i*Math.floor(maxVal/counter); } //floor to decina
     else if(i===0){ return "0";}
 });
-console.log(tickVals);
 
 
 var xscale = d3.scale.linear()
@@ -582,6 +585,10 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
                     print('<th class="ui-helper-center">Somma aggiudicata (come singolo)</th>');
                 } else if (total.m.name == "paidTotal") {
                     print('<th class="ui-helper-center">Somma effettivamente ricevuta (come singolo)</th>');
+                } else if (total.m.name == "awardsTotal") {
+                    print('<th class="ui-helper-center">Somma stanziata</th>');
+                } else if (total.m.name == "paysTotal") {
+                    print('<th class="ui-helper-center">Somma effettivamente erogata</th>');
                 }
                 %>
             </tr>
