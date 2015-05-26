@@ -495,7 +495,7 @@ var yscale = d3.scale.linear()
     .domain([0,categories.length])
     .range([0,yHigh]);
 
-var canvas = d3.select('#'+awardedPaymentFromLink.m.name)
+var canvas = d3.select('#'+awardedPaymentFromLink.m.name) //here it appends the graph
     .append('svg')
     .attr({'width':1140,'height':yHigh+50});
 
@@ -537,6 +537,7 @@ var x_xis = canvas.append('g')
         .attr('id','xaxis')
         .call(xAxis);
 
+setTimeout(function(){
 var chart = canvas.append('g') //drow chart
        .attr("transform", "translate(300,0)")
        .attr('id','bars'+awardedPaymentFromLink.m.name)
@@ -550,12 +551,14 @@ var chart = canvas.append('g') //drow chart
        .attr('width',function(d){ return 0; });
 
 
-var transit = d3.select("svg").selectAll("rect") //drow bars with effects
+var transit = d3.select("#"+awardedPaymentFromLink.m.name+" svg").selectAll("rect") //drow bars with effects
           .data(dollars)
           .transition()
           .duration(1000) 
           .attr("width", function(d) {return xscale(d); });
+}, 2000);
 
+setTimeout(function(){
 var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text after bars
        .selectAll('text')
        .data(dollars)
@@ -563,6 +566,7 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
        .append('text')
        .attr({'x':function(d) {return xscale(d)+10; },'y':function(d,i){ return yscale(i)+20+counter; }})
        .text(function(d){ return d; }).style({'fill':'#000','font-size':'14px'});
+}, 3000);
 
 //TODO hover values presents in fullNames when names are truncated
        
