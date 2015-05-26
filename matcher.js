@@ -28,7 +28,7 @@ var combineMatchers = [
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "contractInformation", templateId: "pagingBox", combineIds: ['rdfschema_label'], order: 100000},
     {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000},
-    {matcherName: "registryCombine", templateId: "registry", combineIds: ['rdfschema_label', 'gr_vatID'], order: 100000},
+    {matcherName: "registryCombine", templateId: "registryA", combineIds: ['rdfschema_label', 'gr_vatID'], order: 100000},
 
 ];
 
