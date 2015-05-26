@@ -423,15 +423,18 @@ for (var i = 0; i < counter; i++) {
     categories[i] = awardedPaymentFromLink[i].awardedPaymentBars.label.u;
     dollars[i] = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
     if (maxVal < Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u)) {
-        maxVal = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+        maxVal = Math.floor(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
     }
     if (minVal > Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u)) {
-        minVal = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+        minVal = Math.floor(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
     }
 }
 
 if (maxVal == minVal) {
     minVal = Math.floor(maxVal/10);
+}
+if (minVal < 5) {
+    minVal = 0;
 }
 
 /* start order */
@@ -473,14 +476,16 @@ for (i=0; i<categories.length; i++) {
 
 var color = "#0283AF";
 
-var grid = d3.range(28).map(function(i){ //30 vertical bars number
+var grid = d3.range(17).map(function(i){ //17 vertical bars number
     return {'x1':0,'y1':0,'x2':0,'y2':yHigh};
 });
 
-var tickVals = grid.map(function(d,i){
-    if(i>0){ return i*10; }
+var tickVals = grid.map(function(d,i){ //xAxis values
+    if(i>0){ return i*Math.floor(maxVal/counter); } //floor to decina
     else if(i===0){ return "0";}
 });
+console.log(tickVals);
+
 
 var xscale = d3.scale.linear()
     .domain([minVal,maxVal+maxVal*0.1])
@@ -501,9 +506,9 @@ var grids = canvas.append('g')
     .data(grid)
     .enter()
     .append('line')
-    .attr({'x1':function(d,i){ return i*30; },
+    .attr({'x1':function(d,i){ return i*50; },
          'y1':function(d){ return d.y1; },
-         'x2':function(d,i){ return i*30; },
+         'x2':function(d,i){ return i*50; },
          'y2':function(d){ return d.y2-10; },
     })
     .style({'stroke':'#adadad','shape-rendering':'crispEdges'}); //long vertical ticks (stroke-width:1px)
@@ -562,6 +567,27 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
 //TODO hover values presents in fullNames when names are truncated
        
 %>
+</script>
+
+<script id="simpleTable" type="text/uduvudu-template">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <%
+                if (total.m.name == "awardedTotal") {
+                    print('<th class="ui-helper-center">Somma aggiudicata (come singolo)</th>');
+                } else if (total.m.name == "paidTotal") {
+                    print('<th class="ui-helper-center">Somma effettivamente ricevuta (come singolo)</th>');
+                }
+                %>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="ui-helper-center"><%- total.u %> €</td>
+            </tr>
+        </tbody>
+    </table>
 </script>
 
 <!-- container for literals -->
