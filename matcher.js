@@ -48,8 +48,9 @@ var linkMatchers = [
     {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkVatIDPANum", predicate: "http://public-contracts.nexacenter.org/id/numberOfPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkVatIDBE", predicate: "http://public-contracts.nexacenter.org/id/awardsBusinessEntity", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
-    {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/numberOfBEs", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
-    {matcherName: "linkProcedureType", predicate: "http://public-contracts.nexacenter.org/id/hasContract", templateVariable: "procedureTypeLink", templateId: "bubbles", order: 200000, linkIds: ['procedureTypeBubble']}
+    {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/hire", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
+    {matcherName: "linkProcedureType", predicate: "http://public-contracts.nexacenter.org/id/hasContract", templateVariable: "procedureTypeLink", templateId: "bubbles", order: 200000, linkIds: ['procedureTypeBubble']},
+    
 ];
 
 var predicateMatchers = [
