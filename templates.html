@@ -314,7 +314,11 @@ $(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" 
 <script id="pagingBox" type="text/uduvudu-template">
 <div class="row-fluid">
     <div class="span6">
-        <h4>Contratti partecipati (<% print(contractLink.length) %>)</h4>
+<%if (contractLink.m.name === "linkVatIDCig") {
+    print('<h4>Contratti partecipati ('+contractLink.length+')</h4>');
+} else if (contractLink.m.name === "linkVatIDWonCig") {
+    print('<h4>Contratti aggiudicati ('+contractLink.length+')</h4>');
+}%>
         <div class="nav nav-tabs nav-stacked">
             <div class="list-group" id="pageStuff<%-contractLink.m.name%>">
 
@@ -330,8 +334,7 @@ $(".row").append('<div class="col-sm-3"><a href="'+fileurl+'" class="thumbnail" 
     </div>
     <div class="span6" id="nums_outer">
         <nav>
-            <% print('<ul class="pagination" id="'+contractLink.m.name+'"></ul>'); 
-console.log(contractLink);%>
+            <% print('<ul class="pagination" id="'+contractLink.m.name+'"></ul>'); %>
         </nav> 
     </div> 
 </div>
@@ -395,53 +398,105 @@ function goTo<%-contractLink.m.name%>(page){
 }
 </script>
 
-<script id="bars" type="text/uduvudu-template">
-<div id="bar-canvas"></div>
-   <%console.log(awardedPaymentFromLink[0].awardedPaymentBars.awarded.u)
-   console.log(awardedPaymentFromLink[0].awardedPaymentBars.label.u)
-   console.log(awardedPaymentFromLink[0].awardedPaymentBars.label.m.r) %>
-</script>
+<script id="bars" type="text/uduvudu-template"><div></div></script>
 
 <script id="bars_js" type="text/uduvudu-template">
-<% var categories = [];
-categories[0] = ""; //trick for vertical align
-var dollars = [];
-
-for (var i = 1; i < awardedPaymentFromLink.length; i++) {
-    categories[i] = awardedPaymentFromLink[i].awardedPaymentBars.label.u;
-    dollars[i-1] = awardedPaymentFromLink[i].awardedPaymentBars.awarded.u;
+<% 
+if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
+    $('#titleLinkVatIDPA').html('<h4>Totale importi assegnati dalle PA</h4>');
+} else if (awardedPaymentFromLink.m.name === "linkVatIDPANum") {
+    $('#titleLinkVatIDPANum').html('<h4>Numero gare vinte</h4>');
 }
 
-var colors = ['#0283AF'];
+var categories = [];
+var dollars = [];
+var zipped = [];
+var maxVal = 0;
+var minVal = 99999999;
 
-var grid = d3.range(25).map(function(i){
-    return {'x1':0,'y1':0,'x2':0,'y2':480};
+var counter = awardedPaymentFromLink.length;
+
+var yHigh = 30*counter;
+var xHigh = 820;
+
+for (var i = 0; i < counter; i++) {
+    categories[i] = awardedPaymentFromLink[i].awardedPaymentBars.label.u;
+    dollars[i] = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+    if (maxVal < Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u)) {
+        maxVal = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+    }
+    if (minVal > Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u)) {
+        minVal = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+    }
+}
+
+if (maxVal == minVal) {
+    minVal = Math.floor(maxVal/10);
+}
+
+/* start order */
+for(i=0; i<dollars.length; ++i) {
+    zipped.push({
+        dollarselem: dollars[i],
+        categorieselem: categories[i]
+    });
+}
+
+zipped.sort(function(left, right) {
+    var leftdollarselem = left.dollarselem,
+        rightdollarselem = right.dollarselem;
+
+    return leftdollarselem === rightdollarselem ? 0 : (leftdollarselem > rightdollarselem ? -1 : 1);
+});
+
+dollars = [];
+categories = [];
+for(i=0; i<zipped.length; ++i) {
+    dollars.push(zipped[i].dollarselem);
+    categories.push(zipped[i].categorieselem);
+}
+
+for (i=categories.length; i>0; i--) {
+    categories[i] = categories[i-1];
+}
+categories[0] = ""; //trick for vertical align
+
+var fullNames = [];
+for (i=0; i<categories.length; i++) {
+    if (categories[i].length > 40) {
+        fullNames[i] = categories[i];
+        var myTruncatedString = categories[i].substring(0,40);
+        categories[i] = myTruncatedString+"...";
+    }
+}
+/* end order */
+
+var color = "#0283AF";
+
+var grid = d3.range(28).map(function(i){ //30 vertical bars number
+    return {'x1':0,'y1':0,'x2':0,'y2':yHigh};
 });
 
 var tickVals = grid.map(function(d,i){
     if(i>0){ return i*10; }
-    else if(i===0){ return "100";}
+    else if(i===0){ return "0";}
 });
 
 var xscale = d3.scale.linear()
-    .domain([10,250])
-    .range([0,722]);
+    .domain([minVal,maxVal+maxVal*0.1])
+    .range([0,xHigh]);
 
 var yscale = d3.scale.linear()
     .domain([0,categories.length])
-    .range([0,480]);
+    .range([0,yHigh]);
 
-var colorScale = d3.scale.quantize()
-    .domain([0,categories.length])
-    .range(colors);
-
-var canvas = d3.select('#main')
+var canvas = d3.select('#'+awardedPaymentFromLink.m.name)
     .append('svg')
-    .attr({'width':900,'height':550});
+    .attr({'width':1140,'height':yHigh+50});
 
 var grids = canvas.append('g')
     .attr('id','grid')
-    .attr('transform','translate(150,10)')
+    .attr('transform','translate(300,10)')
     .selectAll('line')
     .data(grid)
     .enter()
@@ -454,55 +509,58 @@ var grids = canvas.append('g')
     .style({'stroke':'#adadad','shape-rendering':'crispEdges'}); //long vertical ticks (stroke-width:1px)
 
 var xAxis = d3.svg.axis();
-   xAxis
+    xAxis
     .orient('bottom')
     .scale(xscale)
     .tickValues(tickVals);
 
 var yAxis = d3.svg.axis();
-   yAxis
+    yAxis
     .orient('left')
     .scale(yscale)
     .tickSize(2)
     .tickFormat(function(d,i){ return categories[i]; })
-    .tickValues(d3.range(17));
+    .tickValues(d3.range(counter+1));
 
 var y_xis = canvas.append('g')
-        .attr("transform", "translate(150,0)")
+        .attr("transform", "translate(300,0)")
         .attr('id','yaxis')
         .call(yAxis);
 
 var x_xis = canvas.append('g')
-        .attr("transform", "translate(150,480)")
+        .attr("transform", "translate(300,"+yHigh+")")
         .attr('id','xaxis')
         .call(xAxis);
 
-var chart = canvas.append('g')
-       .attr("transform", "translate(150,0)")
-       .attr('id','bars')
+var chart = canvas.append('g') //drow chart
+       .attr("transform", "translate(300,0)")
+       .attr('id','bars'+awardedPaymentFromLink.m.name)
        .selectAll('rect')
        .data(dollars)
        .enter()
        .append('rect')
-       .attr('height',19)
-       .attr({'x':0,'y':function(d,i){ return yscale(i)+19; }})
-       .style('fill',function(d,i){ return colorScale(0); }) //XXX color trick colorScale(i)
+       .attr('height',10) //rect height
+       .attr({'x':0,'y':function(d,i){ return yscale(i)+10+counter; }}) //rect y position
+       .style('fill',function(d,i){ return color; })
        .attr('width',function(d){ return 0; });
 
 
-var transit = d3.select("svg").selectAll("rect")
+var transit = d3.select("svg").selectAll("rect") //drow bars with effects
           .data(dollars)
           .transition()
           .duration(1000) 
           .attr("width", function(d) {return xscale(d); });
 
-var transitext = d3.select('#bars')
+var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text after bars
        .selectAll('text')
        .data(dollars)
        .enter()
        .append('text')
-       .attr({'x':function(d) {return xscale(d)-200; },'y':function(d,i){ return yscale(i)+35; }})
-       .text(function(d){ return d+"$"; }).style({'fill':'#fff','font-size':'14px'});
+       .attr({'x':function(d) {return xscale(d)+10; },'y':function(d,i){ return yscale(i)+20+counter; }})
+       .text(function(d){ return d; }).style({'fill':'#000','font-size':'14px'});
+
+//TODO hover values presents in fullNames when names are truncated
+       
 %>
 </script>
 
