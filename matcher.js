@@ -29,6 +29,7 @@ var combineMatchers = [
     {matcherName: "contractInformation", templateId: "pagingBox", combineIds: ['rdfschema_label'], order: 100000},
     {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000},
     {matcherName: "registryCombine", templateId: "registry", combineIds: ['rdfschema_label', 'gr_vatID'], order: 100000},
+    {matcherName: "procedureTypeBubble", templateId: "bubbles", combineIds: ['rdfschema_label', 'amount', 'procedure_type'], order: 100000},
 
 ];
 
@@ -47,7 +48,8 @@ var linkMatchers = [
     {matcherName: "linkVatIDPA", predicate: "http://public-contracts.nexacenter.org/id/awardedPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkVatIDPANum", predicate: "http://public-contracts.nexacenter.org/id/numberOfPaymentFrom", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkVatIDBE", predicate: "http://public-contracts.nexacenter.org/id/awardsBusinessEntity", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
-    {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/numberOfBEs", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']}
+    {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/numberOfBEs", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
+    {matcherName: "linkProcedureType", predicate: "http://public-contracts.nexacenter.org/id/hasContract", templateVariable: "procedureTypeLink", templateId: "bubbles", order: 200000, linkIds: ['procedureTypeBubble']}
 ];
 
 var predicateMatchers = [
@@ -149,5 +151,8 @@ var predicateMatchers = [
     {matcherName: "paidTotal", predicate: "http://public-contracts.nexacenter.org/id/paidTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
     {matcherName: "awardsTotal", predicate: "http://public-contracts.nexacenter.org/id/awardsTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
     {matcherName: "paysTotal", predicate: "http://public-contracts.nexacenter.org/id/paysTotal", templateId: "simpleTable", templateVariable: "total", order: 1100000},
-    {matcherName: "gr_vatID", predicate: "http://purl.org/goodrelations/v1#vatID", templateId: "text", templateVariable: "vatID", order: 1100000}
+    {matcherName: "gr_vatID", predicate: "http://purl.org/goodrelations/v1#vatID", templateId: "text", templateVariable: "vatID", order: 1100000},
+    {matcherName: "amount", predicate: "http://public-contracts.nexacenter.org/id/import", templateId: "text", templateVariable: "amount", order: 1100000},
+    {matcherName: "procedure_type", predicate: "http://public-contracts.nexacenter.org/id/procedureType", templateId: "text", templateVariable: "procedure_type", order: 1100000},
+   
 ];
