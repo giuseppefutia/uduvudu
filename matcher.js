@@ -28,7 +28,7 @@ var combineMatchers = [
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "contractInformation", templateId: "pagingBox", combineIds: ['rdfschema_label'], order: 100000},
     {matcherName: "awardedPaymentBars", templateId: "bars", combineIds: ['rdfschema_label', 'awarded'], order: 100000},
-    {matcherName: "procedureTypeBubble", templateId: "bubbles", combineIds: ['rdfschema_label', 'amount', 'procedure_type'], order: 100000},
+    {matcherName: "procedureTypeBubble", templateId: "bubbles", combineIds: ['rdfschema_label', 'amount', 'procedure_type', 'time_year'], order: 100000},
     {matcherName: "registryCombine", templateId: "registryA", combineIds: ['rdfschema_label', 'gr_vatID'], order: 100000},
 
 ];
@@ -50,7 +50,7 @@ var linkMatchers = [
     {matcherName: "linkVatIDBE", predicate: "http://public-contracts.nexacenter.org/id/awardsBusinessEntity", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkVatIDBENum", predicate: "http://public-contracts.nexacenter.org/id/hire", templateVariable: "awardedPaymentFromLink", templateId: "bars", order: 200000, linkIds: ['awardedPaymentBars']},
     {matcherName: "linkProcedureType", predicate: "http://public-contracts.nexacenter.org/id/hasContract", templateVariable: "procedureTypeLink", templateId: "bubbles", order: 200000, linkIds: ['procedureTypeBubble']},
-    
+
 ];
 
 var predicateMatchers = [
@@ -155,5 +155,5 @@ var predicateMatchers = [
     {matcherName: "gr_vatID", predicate: "http://purl.org/goodrelations/v1#vatID", templateId: "text", templateVariable: "vatID", order: 1100000},
     {matcherName: "amount", predicate: "http://public-contracts.nexacenter.org/id/import", templateId: "text", templateVariable: "amount", order: 1100000},
     {matcherName: "procedure_type", predicate: "http://public-contracts.nexacenter.org/id/procedureType", templateId: "text", templateVariable: "procedure_type", order: 1100000},
-   
+    {matcherName: "time_year", predicate: "http://www.w3.org/2006/time#year", templateId: "text", templateVariable: "time_year", order: 1100000}
 ];
