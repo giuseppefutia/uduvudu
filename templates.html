@@ -612,9 +612,9 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
 
 <script id="bubbles" type="text/uduvudu-template">
 <%
-    $("#titleProcedureType").append("<h4>Contratti per tipo di procedura</h4>"); 
-    $("#view_selection").append('<button type="button" id="all" class="btn btn-default active" onclick="reloadBubble(\'all\')">All</button>');
-    $("#view_selection").append('<button type="button" id="year" class="btn btn-default" onclick="reloadBubble(\'year\')">By Year</button>');
+    $("#titleProcedureType").append("<h4>Contratti per anno</h4>"); 
+    $("#view_selection").append('<button type="button" id="all" class="btn btn-default active" onclick="reloadBubble(\'all\')">Tutti</button>');
+    $("#view_selection").append('<button type="button" id="year" class="btn btn-default" onclick="reloadBubble(\'year\')">Per anno</button>');
 %>
 </script>
 
@@ -625,7 +625,8 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
         bubbleArray[i] = new Object;
         bubbleArray[i].grant_title = procedureTypeLink[i].procedureTypeBubble.label.u;
         bubbleArray[i].total_amount = procedureTypeLink[i].procedureTypeBubble.amount.u;
-        bubbleArray[i].start_year = "2010";//procedureTypeLink[i].procedureTypeBubble.procedure_type.u;
+        bubbleArray[i].start_year = procedureTypeLink[i].procedureTypeBubble.time_year.u;
+        bubbleArray[i].procedure_type = procedureTypeLink[i].procedureTypeBubble.procedure_type.u;
         bubbleArray[i].id = (i+1).toString();
     }
     custom_bubble_chart.init(bubbleArray);
