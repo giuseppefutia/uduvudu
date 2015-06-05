@@ -418,6 +418,8 @@ if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
 
 var categories = [];
 var dollars = [];
+var uri = {};
+uri[awardedPaymentFromLink.m.name] = {};
 var zipped = [];
 var maxVal = 0;
 var minVal = 99999999;
@@ -430,6 +432,7 @@ var xHigh = 820;
 for (var i = 0; i < counter; i++) {
     categories[i] = awardedPaymentFromLink[i].awardedPaymentBars.label.u;
     dollars[i] = Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
+    uri[awardedPaymentFromLink.m.name][categories[i]] = awardedPaymentFromLink[i].awardedPaymentBars.label.m.r;
     if (maxVal < Math.abs(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u)) {
         maxVal = Math.floor(awardedPaymentFromLink[i].awardedPaymentBars.awarded.u);
     }
@@ -464,6 +467,7 @@ for(i=0; i<zipped.length; ++i) {
     dollars.push(zipped[i].dollarselem);
     categories.push(zipped[i].categorieselem);
 }
+/* end order */
 
 for (i=categories.length; i>0; i--) {
     categories[i] = categories[i-1];
@@ -472,8 +476,8 @@ categories[0] = ""; //trick for vertical align
 
 var fullNames = [];
 for (i=0; i<categories.length; i++) {
+    fullNames[i] = categories[i];
     if (categories[i].length > 40) {
-        fullNames[i] = categories[i];
         var myTruncatedString = categories[i].substring(0,40);
         categories[i] = myTruncatedString+"...";
     }
@@ -573,9 +577,30 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
        .text(function(d){ return d; }).style({'fill':'#000','font-size':'14px'});
 }, 3000);
 
+d3.selectAll(".tick").on("mouseover", function(d, i) {
+     d3.select(this).transition()
+                                .duration(200)
+                                .style("opacity", 0.4)
+                                .style("cursor", "pointer");
+});
+
+d3.selectAll(".tick").on("mouseout", function(d, i) {
+     d3.select(this).transition()
+                                .duration(200)
+                                .style("opacity", 1)
+                                .style("cursor", "default");
+});
+
+
+d3.selectAll('#'+awardedPaymentFromLink.m.name+' .tick').on('click', function(d) { 
+    window.open(uri[awardedPaymentFromLink.m.name][fullNames[d]], '_blank').focus();
+});
+
 //TODO hover values presents in fullNames when names are truncated
        
 %>
+
+
 </script>
 
 <script id="simpleTable" type="text/uduvudu-template">
