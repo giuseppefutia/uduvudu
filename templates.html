@@ -407,13 +407,13 @@ function goTo<%-contractLink.m.name%>(page){
 <script id="bars_js" type="text/uduvudu-template">
 <% 
 if (awardedPaymentFromLink.m.name === "linkVatIDPA") {
-    $('#titleLinkVatIDPA').html('<h4>Totale importi ricevuti [€]</h4>');
+    $('#titleLinkVatIDPA').html("<h4>Totale importi ricevuti [€]</h4> <p>Nel grafico seguente vengono riportate le stazioni appaltanti più rilevanti classificate secondo gli importi ricevuti dall'ente.</p><br>");
 } else if (awardedPaymentFromLink.m.name === "linkVatIDPANum") {
-    $('#titleLinkVatIDPANum').html('<h4>Numero gare vinte per stazione appaltante</h4>');
+    $('#titleLinkVatIDPANum').html("<h4>Numero gare vinte per stazione appaltante</h4> <p>Nel grafico seguente vengono riportate le stazioni appaltanti più rilevanti classificate secondo il numero di gare vinte dall'ente.</p><br>");
 } else if (awardedPaymentFromLink.m.name === "linkVatIDBE") {
-    $('#titleLinkVatIDBE').html('<h4>Totale importi assegnati per beneficiario [€]</h4>');
+    $('#titleLinkVatIDBE').html("<h4>Totale importi assegnati per beneficiario [€]</h4><p>Nel grafico seguente vengono riportati i beneficiari più rilevanti classificati secondo gli importi assegnati dall'ente.</p><br>");
 } else if (awardedPaymentFromLink.m.name === "linkVatIDBENum") {
-    $('#titleLinkVatIDBENum').html('<h4>Numero gare vinte per beneficiario</h4>');
+    $('#titleLinkVatIDBENum').html("<h4>Numero gare vinte per beneficiario</h4><p>Nel grafico seguente vengono riportati i beneficiari più rilevanti classificati secondo il numero di contratti assegnati dall'ente.</p><br>");
 }
 
 var categories = [];
@@ -584,10 +584,12 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
             <tr>
                 <%
                 if (total.m.name == "awardedTotal") {
+                    $("#incomeTitle").append("<br><h3>Informazioni sui bandi di gara e contratti assegnati al soggetto</h3><br>");
                     print('<th class="ui-helper-center">Totale degli importi aggiudicati</th>');
                 } else if (total.m.name == "paidTotal") {
                     print('<th class="ui-helper-center">Totale degli importi percepiti</th>');
                 } else if (total.m.name == "awardsTotal") {
+                  $("#outcomeTitle").append("<br><h3>Informazioni sui bandi di gara e contratti pubblicati dal soggetto</h3><br>");
                     print('<th class="ui-helper-center">Totale degli importi messi a bando</th>');
                 } else if (total.m.name == "paysTotal") {
                     print('<th class="ui-helper-center">Totale degli importi erogati</th>');
@@ -601,6 +603,7 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
             </tr>
         </tbody>
     </table>
+    <br>
 </script>
 
 <script id="registryA" type="text/uduvudu-template">
@@ -613,7 +616,7 @@ var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text 
 
 <script id="bubbles" type="text/uduvudu-template">
 <%
-    $("#titleProcedureType").append("<h4>Contratti per anno</h4>"); 
+    $("#titleProcedureType").append("<h4>Contratti pubblici suddivisi per anno</h4><p>Ogni cerchio rappresenta un singolo contratto pubblico messo a bando dall'ente. Le dimensioni dell'area di ciascun cerchio dipendono dall'ammontare del contratto.</p><br>"); 
     $("#view_selection").append('<button type="button" id="all" class="btn btn-default active" onclick="reloadBubble(\'all\')">Tutti</button>');
     $("#view_selection").append('<button type="button" id="year" class="btn btn-default" onclick="reloadBubble(\'year\')">Per anno</button>');
 %>
