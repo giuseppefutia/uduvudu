@@ -633,10 +633,18 @@ d3.selectAll('#'+awardedPaymentFromLink.m.name+' .tick').on('click', function(d)
 
 <script id="registryA" type="text/uduvudu-template">
 <header>
-    <h1><a href="http://public-contracts.nexacenter.org/pc/businessEntities/<%- registryCombine.vatID.u %>"><%- registryCombine.label.u %></a></h1>
-    <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;&nbsp;<a href="http://public-contracts.nexacenter.org/view/<%- registryCombine.vatID.u %>"><%- registryCombine.vatID.u %></a>
-    <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;&nbsp;<a href="http://public-contracts.nexacenter.org/download/<%- registryCombine.vatID.u %>/stats.json">statistiche</a>
+    <div id="labels">
+        <h1><a href="http://public-contracts.nexacenter.org/pc/businessEntities/<%- registryCombine.vatID.u %>"><%- registryCombine.label.u %></a></h1>
+        <span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp;&nbsp;<a href="http://public-contracts.nexacenter.org/view/<%- registryCombine.vatID.u %>"><%- registryCombine.vatID.u %></a>
+    </div>
 </header>
+</script>
+
+<script id="registryA_js" type="text/uduvudu-template">
+var result = doesFileExist("http://public-contracts.nexacenter.org/download/<%- registryCombine.vatID.u %>/stats.json");
+if (result == true) {
+    $("#labels").append('<span class="glyphicon glyphicon-tasks" aria-hidden="true"></span>&nbsp;&nbsp;<a href="http://public-contracts.nexacenter.org/download/<%- registryCombine.vatID.u %>/stats.json">statistiche</a>');
+}
 </script>
 
 <script id="bubbles" type="text/uduvudu-template">
