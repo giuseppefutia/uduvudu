@@ -574,13 +574,13 @@ var transit = d3.select("#"+awardedPaymentFromLink.m.name+" svg").selectAll("rec
 }, 2000);
 
 setTimeout(function(){
-var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text after bars
-       .selectAll('text')
-       .data(dollars)
-       .enter()
-       .append('text')
-       .attr({'x':function(d) {return xscale(d)+10; },'y':function(d,i){ return yscale(i)+20+counter; }})
-       .text(function(d){ return d; }).style({'fill':'#000','font-size':'14px'});
+    var transitext = d3.selectAll('#bars'+awardedPaymentFromLink.m.name) //add text after bars
+        .selectAll('text')
+        .data(dollars)
+        .enter()
+        .append('text')
+        .attr({'x':function(d) {return xscale(d)+10; },'y':function(d,i){ return yscale(i)+20+counter; }})
+        .text(function(d){ return addCommas(d); }).style({'fill':'#000','font-size':'14px'});
 }, 3000);
 
 d3.selectAll(".tick").on("mouseover", function(d, i) {
@@ -632,7 +632,7 @@ d3.selectAll('#'+awardedPaymentFromLink.m.name+' .tick').on('click', function(d)
         </thead>
         <tbody>
             <tr>
-                <td class="ui-helper-center"><%- total.u %> €</td>
+                <td class="ui-helper-center"><% print(addCommas(total.u)) %> €</td>
             </tr>
         </tbody>
     </table>
