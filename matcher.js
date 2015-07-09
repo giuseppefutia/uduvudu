@@ -40,7 +40,7 @@ var linkMatchers = [
     {matcherName: "linkEventLocation", predicate: "http://schema.org/location", templateVariable: "locationLink", templateId: "eventLocation", order: 200000, linkIds: ['eventLocation']},
     {matcherName: "linkEventOrganizer", predicate: "http://schema.org/organizer", templateVariable: "organizerLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventOrganizer']},
     {matcherName: "linkEventAddress", predicate: "http://schema.org/address", templateVariable: "addressLink", templateId: "eventInfoBox", order: 200000, linkIds: ['eventAddress']},
-    {matcherName: "linkPOIEvent", predicate: "http://sandbox.fusepool.info:8181/contains", templateVariable: "POILink", templateId: "POIInfoBox", order: 1100000, linkIds: ['eventPOI']}, // Usable only for Fusepool Platform
+    {matcherName: "linkPOIEvent", predicate: "http://data.fusepool.info:8181/contains", templateVariable: "POILink", templateId: "POIInfoBox", order: 1100000, linkIds: ['eventPOI']}, // Usable only for Fusepool Platform
     {matcherName: "linkSkosRelated", predicate: "http://www.w3.org/2004/02/skos/core#related", templateVariable: "skosLink", templateId: "carousel", order: 100000, linkIds: ['eventSkos']},
     //Matchers for http://public-contracts.nexacenter.org/
     {matcherName: "linkVatIDCig", predicate: "http://public-contracts.nexacenter.org/id/contract", templateVariable: "contractLink", templateId: "pagingBox", order: 200000, linkIds: ['contractInformation']},
