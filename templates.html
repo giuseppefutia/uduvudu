@@ -264,7 +264,7 @@
       <h2>Points of interest</h2>
       <br>
       <% 
-      var iconMap = {
+      iconMap = {
         'Ristorante' : '<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> ',
         'Affitta Camere' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Bed & Breakfast' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
@@ -277,8 +277,14 @@
       };
       $("#poi2").html("")
       for (var i = 0; i < POILink.length; i++) {
-        $("#poi2").append('<div class="singlePOI-' + i + '" style="width: 380px; height: 200px; float: left;"></div>');
-        $(".singlePOI-" + i ).append('<h4>' + POILink[i].eventPOI.label.u + '</h4>')
+        $("#poi2").append('<div data-id=' + POILink[i].eventPOI.category.m.r + ' class="singlePOI-' + i + '" style="width: 380px; height: 200px; float: left;"></div>');
+        var $editBtn = $('<span class="icon-edit glyphicon glyphicon-edit" aria-hidden="true"></span>');
+        $editBtn.on('click.edit', function(e){
+        	editModal.open($(this).parent('h4').parent('div').attr('class'));
+        });
+        var $h4 = $('<h4/>').attr({'data-type': 'text','data-name': POILink[i].eventPOI.label.m.p, 'data-value': POILink[i].eventPOI.label.u}).text(POILink[i].eventPOI.label.u);
+        $h4.append($editBtn);
+        $h4.appendTo($(".singlePOI-" + i));
         $(".singlePOI-" + i ).append('<p>' + iconMap[POILink[i].eventPOI.category.u] + '<b>' + POILink[i].eventPOI.category.u + '</b></p>')
         $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="//' + POILink[i].eventPOI.homepage.u + '" target="_blank">' + POILink[i].eventPOI.homepage.u + '</a></p>')
         $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> ' + POILink[i].eventPOI.mbox.u + '</p>')
