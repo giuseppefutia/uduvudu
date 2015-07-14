@@ -264,7 +264,7 @@
       <h2>Points of interest</h2>
       <br>
       <% 
-      iconMap = {
+      var iconMap = {
         'Ristorante' : '<span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span> ',
         'Affitta Camere' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Bed & Breakfast' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
@@ -273,22 +273,27 @@
         'Agriturismo' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Rifugio' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> ',
         'Residence' : '<span class="glyphicon glyphicon-home" aria-hidden="true"></span> '
-
       };
       $("#poi2").html("")
       for (var i = 0; i < POILink.length; i++) {
         $("#poi2").append('<div data-id=' + POILink[i].eventPOI.category.m.r + ' class="singlePOI-' + i + '" style="width: 380px; height: 200px; float: left;"></div>');
+        // edit button
         var $editBtn = $('<span class="icon-edit glyphicon glyphicon-edit" aria-hidden="true"></span>');
         $editBtn.on('click.edit', function(e){
         	editModal.open($(this).parent('h4').parent('div').attr('class'));
         });
-        var $h4 = $('<h4/>').attr({'data-type': 'text','data-name': POILink[i].eventPOI.label.m.p, 'data-value': POILink[i].eventPOI.label.u}).text(POILink[i].eventPOI.label.u);
+        // label name
+        var $h4 = $('<h4/>').attr({'data-type': 'text','data-name': POILink[i].eventPOI.label.m.p, 'data-value': POILink[i].eventPOI.label.u, 'data-label-text': 'Name'}).text(POILink[i].eventPOI.label.u);
         $h4.append($editBtn);
         $h4.appendTo($(".singlePOI-" + i));
-        $(".singlePOI-" + i ).append('<p>' + iconMap[POILink[i].eventPOI.category.u] + '<b>' + POILink[i].eventPOI.category.u + '</b></p>')
-        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a href="//' + POILink[i].eventPOI.homepage.u + '" target="_blank">' + POILink[i].eventPOI.homepage.u + '</a></p>')
-        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> ' + POILink[i].eventPOI.mbox.u + '</p>')
-        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> ' + POILink[i].eventPOI.phone.u +'</p>')    
+        // category
+        $(".singlePOI-" + i ).append('<p>' + iconMap[POILink[i].eventPOI.category.u] + '<b data-type="select" data-name="'+POILink[i].eventPOI.category.m.p+'" data-value="'+POILink[i].eventPOI.category.u+'" data-label-text="Category" data-misc=\'{"Ristorante":"Ristorante","Affitta Camere":"Affitta Camere","Bed & Breakfast":"Bed & Breakfast","Hotel":"Hotel","Appartamento Vacanze":"Appartamento Vacanze","Agriturismo":"Agriturismo","Rifugio":"Rifugio","Residence":"Residence"}\'>' + POILink[i].eventPOI.category.u + '</b></p>')
+        // site link
+        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-globe" aria-hidden="true"></span> <a data-type="text" data-name="'+POILink[i].eventPOI.homepage.m.p+'" data-value="'+POILink[i].eventPOI.homepage.u+'" data-label-text="<span class=\'glyphicon glyphicon-globe\' aria-hidden=\'true\'>" href="//' + POILink[i].eventPOI.homepage.u + '" target="_blank">' + POILink[i].eventPOI.homepage.u + '</a></p>')
+        // email
+        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> <span data-type="text" data-name="'+POILink[i].eventPOI.mbox.m.p+'" data-value="'+POILink[i].eventPOI.mbox.u+'" data-label-text="<span class=\'glyphicon glyphicon-envelope\' aria-hidden=\'true\'>">' + POILink[i].eventPOI.mbox.u + '</span></p>')
+        // phone
+        $(".singlePOI-" + i ).append('<p><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <span data-type="text" data-name="'+POILink[i].eventPOI.phone.m.p+'" data-value="'+POILink[i].eventPOI.phone.u+'" data-label-text="<span class=\'glyphicon glyphicon-earphone\' aria-hidden=\'true\'>">' + POILink[i].eventPOI.phone.u +'</span></p>')    
       }
       %>
 </script>
